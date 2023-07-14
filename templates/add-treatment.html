@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Add Treatment{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="text-center">Add Treatment</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="POST" action="{{ url_for('add_treatment') }}">
+        {{ form.csrf_token }}
+        <div class="mb-3">
+          <label for="{{ form.name.id }}" class="form-label">Name of Treatment</label>
+          {{ form.name(class="form-control") }}
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.category.id }}" class="form-label">Category of Treatment</label>
+          {{ form.category(class="form-select") }}
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.description.id }}" class="form-label">Treatment Description</label>
+          {{ form.description(class="form-control") }}
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.price.id }}" class="form-label">Price</label>
+          <div class="input-group">
+            <span class="input-group-text">RM</span>
+            {{ form.price(class="form-control") }}
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Add New</button>
+          <a href="{{ url_for('hello_world') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Confirmation dialog for cancel button
+  document.querySelector('.btn-secondary').addEventListener('click', function(event) {
+    event.preventDefault();
+    const confirmed = confirm("The new treatment will not be saved. Are you sure you want to cancel?");
+    if (confirmed) {
+      window.location.href = this.href;
+    }
+  });
+</script>
+
+{% if form.errors %}
+<div class="container mt-3">
+  <div class="alert alert-danger" role="alert">
+    Please fill in the incomplete details.
+  </div>
+</div>
+{% endif %}
+{% endblock %}

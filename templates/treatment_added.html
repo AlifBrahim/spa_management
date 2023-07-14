@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Treatment Added{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Treatment Added</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for treatment in treatments %}
+        <tr>
+          <td>{{ treatment.id }}</td>
+          <td>{{ treatment.name }}</td>
+          <td>{{ treatment.category }}</td>
+          <td>{{ treatment.description }}</td>
+          <td>{{ treatment.price }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
